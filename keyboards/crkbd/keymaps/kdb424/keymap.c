@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GESC,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
   TAB_SB,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
-                                      KC_LALT, SUPER_L, LT1_SP,   LT2_SP,  KC_LCTL, KC_LEAD \
+                                      KC_LALT, SUPER_L, LT1_SP,   LT2_SP,  KC_LCTL, KC_NO \
 ),
 
 /* DVORAK
@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                     KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
   KC_LCTL,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                     KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                     KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
-                                    KC_LALT, KC_SPC,  KC_SPC,   LT2_SP,   KC_LCTL, KC_UP \
+                                    KC_LALT, KC_SPC,  KC_WH_D,   LT2_SP,   KC_LCTL, KC_UP \
 ),
 /* RAISE1
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -139,16 +139,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          `---------------------'           '------''-------------'
  */
 [_SYMBOLS] = LAYOUT_split_3x6_3( \
-  KC_LEAD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL, \
+  _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL, \
   _______, RGB_HUI, RGB_HUD, RGB_VAI, RGB_VAD, _______,                     _______, _______, _______, KC_LBRC, KC_RBRC, _______, \
   _______, RGB_M_P, RGB_MOD, _______, _______, _______,                     _______, _______, _______, _______, _______, _______, \
                                       RGB_TOG, _______,  _______, _______,  _______, _______ \
 )
 };
-
-
-void matrix_init_user(void) {
-}
 
 
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
@@ -335,32 +331,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-LEADER_EXTERNS();
 
-void matrix_scan_user(void) {
-  LEADER_DICTIONARY() {
-    leading = false;
-    leader_end();
-
-    // Vim binds for all
-    SEQ_ONE_KEY(KC_Y) {
-      SEND_STRING(SS_LCTL("c"));
-    }
-    SEQ_ONE_KEY(KC_P) {
-      SEND_STRING(SS_LCTL("v"));
-    }
-    SEQ_ONE_KEY(KC_SLSH) {
-      SEND_STRING(SS_LCTL("f"));
-    }
-    SEQ_TWO_KEYS(KC_D, KC_D) {
-      SEND_STRING(SS_TAP(X_HOME));
-      SEND_STRING(SS_LSFT(SS_TAP(X_END)));
-      SEND_STRING(SS_LCTL("x"));
-    }
-    SEQ_TWO_KEYS(KC_Y, KC_Y) {
-      SEND_STRING(SS_TAP(X_HOME));
-      SEND_STRING(SS_LSFT(SS_TAP(X_END)));
-      SEND_STRING(SS_LCTL("c"));
-    }
-  }
-}

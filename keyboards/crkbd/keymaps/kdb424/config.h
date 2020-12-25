@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #define EE_HANDS
-#define OLED_FONT_H "keyboards/crkbd/keymaps/drashna/glcdfont.c"
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM
