@@ -49,8 +49,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
  [_DVORAK] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                    _______, _______, _______, _______, _______, _______, \
-  KC_GESC,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
+  KC_GESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL, \
+  KC_GRV,   KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
   TAB_SB,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X, XXXXXXX,    XXXXXXX, KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
                             XXXXXXX,  KC_LALT, SUPER_L, LT1_SP,   LT2_SP,  KC_LCTL, KC_UP,   XXXXXXX \
@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
  [_GAMING] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
+  KC_GESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL, \
   KC_ESC,   KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                     KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
   KC_LCTL,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                     KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X, _______,  _______,  KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
@@ -228,7 +228,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #endif
         SEND_STRING(SS_LGUI(SS_TAP(X_ENTER)));
         wait_ms(500);
-        SEND_STRING("cd ~/src/qmk_firmware" SS_TAP(X_ENTER));
+        SEND_STRING("cd ~/src/qmk-firmware" SS_TAP(X_ENTER));
         wait_ms(100);
         SEND_STRING("sleep 1 && make "QMK_KEYBOARD":"QMK_KEYMAP":dfu && exit" SS_TAP(X_ENTER));
         reset_keyboard();
