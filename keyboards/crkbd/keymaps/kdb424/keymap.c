@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GESC,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
   TAB_SB,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
-                                      KC_LALT, SUPER_L, LT1_SP,   LT2_SP,  KC_LCTL, KC_NO \
+                                      KC_LALT, SUPER_L, LT1_SP,   LT2_SP,  KC_LCTL, LGUI(KC_D) \
 ),
 
 /* DVORAK
@@ -320,7 +320,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_ENTER)));
         wait_ms(500);
-        SEND_STRING("cd ~/src/qmk_firmware" SS_TAP(X_ENTER));
+        SEND_STRING("cd ~/src/qmk-firmware" SS_TAP(X_ENTER));
         wait_ms(100);
         SEND_STRING("sleep 1 && make "QMK_KEYBOARD":"QMK_KEYMAP":dfu && exit" SS_TAP(X_ENTER));
         reset_keyboard();
