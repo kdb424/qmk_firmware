@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                     KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
   KC_LCTL,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                     KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                     KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
-                                    KC_LALT, KC_SPC,  KC_WH_D,   LT2_SP,   KC_LCTL, KC_UP \
+                                    KC_LALT, KC_SPC,  KC_SPC,   LT2_SP,   KC_LCTL, KC_UP \
 ),
 /* RAISE1
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -268,38 +268,11 @@ void render_logo(void) {
     render_line();
 }
 
-void render_layer(void) {
-    oled_write_P(PSTR("Layer\n"), false);
-    switch (biton32(layer_state)){
-      case _DVORAK:
-          oled_write_ln_P(PSTR("DVORK"), false);
-          break;
-      case _GAMING:
-          oled_write_ln_P(PSTR("GAME"), false);
-          break;
-      case _RAISE1:
-          oled_write_ln_P(PSTR("LOWER"), false);
-          break;
-      case _RAISE2:
-          oled_write_ln_P(PSTR("RAISE"), false);
-          break;
-      case _SYMBOLS:
-          oled_write_ln_P(PSTR("SYMBL"), false);
-          break;
-      case _GUI:
-          oled_write_ln_P(PSTR(" GUI "), false);
-          break;
-      default:
-          oled_write_ln_P(PSTR("?????"), false);
-  }
-}
-
 
 void oled_task_user(void) {
   if (get_current_wpm() != 000) {
       if (is_master) {
         render_logo();
-        render_layer();
         render_line();
         sprintf(wpm_str, " WPM \n %03d", get_current_wpm());
         oled_write_ln(wpm_str, false);
