@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
+#include "kdb424.c"
+
 #ifdef RGBLIGHT_ENABLE
-//Following line allows macro to read current RGB settings
 extern rgblight_config_t rgblight_config;
 #endif
 #ifdef SSD1306OLED
@@ -16,21 +17,6 @@ extern uint8_t is_master;
 #define _GUI 4
 #define _SYMBOLS 5
 #define REPROGR REPROGRAM_MACRO
-
-enum custom_keycodes {
-  DVORAK = SAFE_RANGE,
-  GAMING,
-  RAISE1,
-  RAISE2,
-  GUI,
-  SYMBOLS,
-  REPROGRAM_MACRO,
-};
-
-#define LT1_SP LT(_RAISE1, KC_SPC)
-#define LT2_SP LT(_RAISE2, KC_SPC)
-#define TAB_SB LT(_SYMBOLS, KC_TAB)
-#define SUPER_L LM(_GUI, MOD_LGUI)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* DVORAK
@@ -284,24 +270,3 @@ void oled_task_user(void) {
   }
 }
 #endif // OLED_DRIVER_ENABLE
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-  }
-  switch (keycode) {
-    case REPROGRAM_MACRO:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI(SS_TAP(X_ENTER)));
-        wait_ms(500);
-        SEND_STRING("cd ~/src/qmk-firmware" SS_TAP(X_ENTER));
-        wait_ms(100);
-        SEND_STRING("sleep 1 && make "QMK_KEYBOARD":"QMK_KEYMAP":dfu && exit" SS_TAP(X_ENTER));
-        reset_keyboard();
-        return false;
-        break;
-     }
-  }
-  return true;
-}
-
-

@@ -90,8 +90,6 @@
 
 
 #ifdef RGBLIGHT_ENABLE
-    #undef RGBLIGHT_ANIMATIONS
-
     #define RGBLIGHT_LIMIT_VAL 200
     #define RGBLIGHT_HUE_STEP 1
     #define RGBLIGHT_SAT_STEP 17

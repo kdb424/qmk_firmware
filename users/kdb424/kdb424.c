@@ -1,5 +1,33 @@
 #include "kdb424.h"
 
+#define _DVORAK 0
+#define _GAMING 1
+#define _RAISE1 2
+
+#define REPROGR REPROGRAM_MACRO
+#define LT1_SP LT(_RAISE1, KC_SPC)
+#define LT2_SP LT(_RAISE2, KC_SPC)
+#define TAB_SB LT(_SYMBOLS, KC_TAB)
+#define SUPER_L LM(_GUI, MOD_LGUI)
+
+
+enum custom_keycodes {
+  DVORAK = SAFE_RANGE,
+  PLOVER,
+  RAISE1,
+  RAISE2,
+  GUI,
+  SYMBOLS,
+  GAMING,
+  REPROGRAM_MACRO,
+};
+
+#ifdef STENO_ENABLE
+void matrix_init_user() {
+  steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
+}
+#endif
+
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
     if(IS_LAYER_ON(_RAISE1)) { // on Raise layer control volume
@@ -43,3 +71,21 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
 #endif
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+  }
+  switch (keycode) {
+    case REPROGRAM_MACRO:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_ENTER)));
+        wait_ms(500);
+        SEND_STRING("cd ~/src/qmk-firmware" SS_TAP(X_ENTER));
+        wait_ms(100);
+        SEND_STRING("sleep 1 && make "QMK_KEYBOARD":"QMK_KEYMAP":dfu && exit" SS_TAP(X_ENTER));
+        reset_keyboard();
+        return false;
+        break;
+     }
+  }
+  return true;
+}

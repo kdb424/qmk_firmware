@@ -1,7 +1,6 @@
 #include QMK_KEYBOARD_H
+#include "kdb424.c"
 #include "keymap_steno.h"
-
-extern uint8_t is_master;
 
 #define _DVORAK 0
 #define _PLOVER 1
@@ -9,22 +8,7 @@ extern uint8_t is_master;
 #define _RAISE2 3
 #define _GUI 4
 #define _SYMBOLS 5
-#define REPROGR REPROGRAM_MACRO
 
-enum custom_keycodes {
-  DVORAK = SAFE_RANGE,
-  PLOVER,
-  RAISE1,
-  RAISE2,
-  GUI,
-  SYMBOLS,
-  REPROGRAM_MACRO,
-};
-
-#define LT1_SP LT(_RAISE1, KC_SPC)
-#define LT2_SP LT(_RAISE2, KC_SPC)
-#define TAB_SB LT(_SYMBOLS, KC_TAB)
-#define SUPER_L LM(_GUI, MOD_LGUI)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* DVORAK
@@ -140,28 +124,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       _______, _______,  _______, _______,  _______, _______ \
 )
 };
-
-void matrix_init_user() {
-  steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
-}
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-  }
-  switch (keycode) {
-    case REPROGRAM_MACRO:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI(SS_TAP(X_ENTER)));
-        wait_ms(500);
-        SEND_STRING("cd ~/src/qmk-firmware" SS_TAP(X_ENTER));
-        wait_ms(100);
-        SEND_STRING("sleep 1 && make "QMK_KEYBOARD":"QMK_KEYMAP":dfu && exit" SS_TAP(X_ENTER));
-        reset_keyboard();
-        return false;
-        break;
-     }
-  }
-  return true;
-}
-
-
