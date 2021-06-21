@@ -1,16 +1,19 @@
 #include QMK_KEYBOARD_H
+#include "keymap_steno.h"
 
 extern uint8_t is_master;
 
 #define _DVORAK 0
-#define _RAISE1 1
-#define _RAISE2 2
-#define _GUI 3
-#define _SYMBOLS 4
+#define _PLOVER 1
+#define _RAISE1 2
+#define _RAISE2 3
+#define _GUI 4
+#define _SYMBOLS 5
 #define REPROGR REPROGRAM_MACRO
 
 enum custom_keycodes {
   DVORAK = SAFE_RANGE,
+  PLOVER,
   RAISE1,
   RAISE2,
   GUI,
@@ -41,6 +44,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   TAB_SB,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
                                       KC_LCTL, SUPER_L, LT1_SP,   LT2_SP,  KC_LCTL, MT(MOD_LALT, LGUI(KC_D)) \
+),
+
+/* Plover
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |  #   |   #  |   #  |   #  |   #  |   #  |                    |   #  |   #  |   #  |   #  |   #  |  #   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |  Fn  |   S  |   T  |   P  |   H  |   *  |                    |   *  |   F  |   P  |   L  |   T  |   D  |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |  Pwr |   S  |   K  |   W  |   R  |   *  |-------.    ,-------|   *  |   R  |   B  |   G  |   S  |   Z  |
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *                          |Dvorak|   A  | /   O   /       \   E  \  |   U  | Exit |
+ *                          |      |      |/       /         \      \ |      |      |
+ *                          `---------------------'           '------''-------------'
+ */
+ [_PLOVER] = LAYOUT_split_3x6_3( \
+  STN_N1,   STN_N2,  STN_N3,  STN_N4,  STN_N5,  STN_N6,                    STN_N7,  STN_N8,  STN_N9,  STN_NA,  STN_NB,  STN_NC, \
+  STN_FN,   STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1,                   STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR, \
+  STN_PWR,  STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2,                   STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR, \
+                                      DF(0), STN_A, STN_O,              STN_E,  STN_U, DF(0) \
 ),
 
 /* RAISE1
@@ -78,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,                     _______, _______, _______, KC_LBRC, KC_RBRC, LSFT(KC_INS), \
   _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,                     KC_HOME, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_END,  \
   _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,                     _______, _______, _______, _______, _______, KC_BSLS, \
-                                      _______, _______,  _______, _______,  _______, _______ \
+                                      _______, _______,  _______, _______,  _______, DF(_PLOVER) \
 ),
 /* GUI
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -119,6 +141,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 };
 
+void matrix_init_user() {
+  steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
