@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "kdb424.c"
+#include <stdio.h>
 
 #ifdef RGBLIGHT_ENABLE
 extern rgblight_config_t rgblight_config;
@@ -7,8 +8,6 @@ extern rgblight_config_t rgblight_config;
 #ifdef SSD1306OLED
   #include "ssd1306.h"
 #endif
-
-extern uint8_t is_master;
 
 #define _DVORAK 0
 #define _GAMING 1
@@ -141,7 +140,7 @@ __attribute__((weak)) bool is_keyboard_left(void){
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  if (is_master) {
+  if (is_keyboard_master()) {
     return OLED_ROTATION_270;
   }
   if (is_keyboard_left()){
@@ -230,7 +229,7 @@ static void render_anim(void) {
         }
     }
 
-    if (strcmp(wpm_str, "000") != 0) {
+    if (get_current_wpm() != 000) {
         anim_sleep = timer_read32();
     }
 
@@ -257,10 +256,10 @@ void render_logo(void) {
 
 void oled_task_user(void) {
   if (get_current_wpm() != 000) {
-      if (is_master) {
+      if (is_keyboard_master()) {
         render_logo();
         render_line();
-        sprintf(wpm_str, " WPM \n %03d", get_current_wpm());
+        snprintf(wpm_str, sizeof(wpm_str), " %3d", get_current_wpm());
         oled_write_ln(wpm_str, false);
       } else {
         render_anim();

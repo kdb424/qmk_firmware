@@ -29,7 +29,7 @@ void matrix_init_user() {
 #endif
 
 #ifdef ENCODER_ENABLE
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     if(IS_LAYER_ON(_RAISE1)) { // on Raise layer control volume
         if (index == 0) {
             if (clockwise) {
@@ -67,6 +67,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             }
         }
     }
+    return true;
 }
 
 #endif
