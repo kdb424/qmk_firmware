@@ -1,9 +1,8 @@
-BOOTLOADER = atmel-dfu
 OLED_DRIVER_ENABLE= no     # OLED display
 WPM_ENABLE= no
 RGBLIGHT_ENABLE = no
 #RGB_MATRIX_ENABLE = WS2812  # per-key RGB and underglow
-#RGB_MATRIX_ENABLE = no  # per-key RGB and underglow
+RGB_MATRIX_ENABLE = no  # per-key RGB and underglow
 ENCODER_ENABLE = no
 LEADER_ENABLE = no
 MOUSEKEY_ENABLE = no

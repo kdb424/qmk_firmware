@@ -19,10 +19,7 @@ TERMINAL_ENABLE = no
 SPACE_CADET_ENABLE = no
 KEY_LOCK_ENABLE = no
 VELOCIKEY_ENABLE = no
+LTO_ENABLE = yes
 
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
-EXTRAFLAGS+=-flto
-
-SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
-LTO_ENABLE = yes
