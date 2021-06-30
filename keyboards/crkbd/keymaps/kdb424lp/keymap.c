@@ -19,7 +19,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | Shft |   ;  |   Q  |   J  |   K  |   X  |-------.    ,-------|   B  |   M  |   W  |   V  |   Z  |   /  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                          | LCTL | LGUI | /LT1_SP /       \LT2_SP\  | LCTL | LALT |
+ *                          | LALT | LGUI | /LT1_SP /       \LT2_SP\  | LCTL | LALT |
  *                          |      |      |/       /         \      \ |      |      |
  *                          `---------------------'           '------''-------------'
  */
@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GESC,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
   TAB_SB,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
-                                      KC_LCTL, SUPER_L, LT1_SP,   LT2_SP,  KC_LCTL, KC_LALT \
+                                      KC_LALT, SUPER_L, LT1_SP,   LT2_SP,  KC_LCTL, LGUI(KC_D) \
 ),
 
 /* Plover
@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------|      |      |   1  |  2   |  3   |   -  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                          | LALT | LGUI | /LT1_SP /       \LT2_SP\  |   =  |  0   |
+ *                          |      |      | /       /       \      \  |   =  |  0   |
  *                          |      |      |/       /         \      \ |      |      |
  *                          `---------------------'           '------''-------------'
  */
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |  F1  |  F2  |  F3  |  F4  |      |-------.    ,-------|      |      |      |      |      |   \  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                          | LALT | LGUI | /LT1_SP /       \LT2_SP\  |      |Plover|
+ *                          | LCTL |      | /       /       \      \  |      |Plover|
  *                          |      |      |/       /         \      \ |      |      |
  *                          `---------------------'           '------''-------------'
  */
@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,                     _______, _______, _______, KC_LBRC, KC_RBRC, LSFT(KC_INS), \
   _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,                     KC_HOME, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_END,  \
   _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,                     _______, _______, _______, _______, _______, KC_BSLS, \
-                                      _______, _______,  _______, _______,  _______, DF(_PLOVER) \
+                                      KC_LCTL, _______,  _______, _______,  _______, DF(_PLOVER) \
 ),
 /* GUI
  * ,-----------------------------------------.                    ,-----------------------------------------.
