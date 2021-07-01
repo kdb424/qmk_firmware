@@ -157,8 +157,8 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 #define ANIM_FRAME_DURATION 200
 #define ANIM_SIZE 512
 
-uint32_t anim_timer = 0;
-uint32_t anim_sleep = 0;
+uint16_t anim_timer = 0;
+uint16_t anim_sleep = 0;
 uint8_t current_idle_frame = 0;
 uint8_t current_tap_frame = 0;
 char wpm_str[6];
@@ -213,31 +213,31 @@ static void render_anim(void) {
 
     void animation_phase(void) {
         if (get_current_wpm() <= IDLE_SPEED) {
-            current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
+            current_idle_frame = (current_idle_frame + 1 > IDLE_FRAMES - 1) ? 0 : current_idle_frame + 1;
 
             oled_write_raw_P(idle[abs((IDLE_FRAMES - 1) - current_idle_frame)], ANIM_SIZE);
         }
 
-        if (get_current_wpm() > IDLE_SPEED && get_current_wpm() < TAP_SPEED) {
+        else if (get_current_wpm() > IDLE_SPEED && get_current_wpm() < TAP_SPEED) {
             oled_write_raw_P(prep[0], ANIM_SIZE);
         }
 
-        if (get_current_wpm() >= TAP_SPEED) {
-            current_tap_frame = (current_tap_frame + 1) % TAP_FRAMES;
+        else if (get_current_wpm() >= TAP_SPEED) {
+            current_tap_frame = (current_tap_frame + 1) & 1;
 
             oled_write_raw_P(tap[abs((TAP_FRAMES - 1) - current_tap_frame)], ANIM_SIZE);
         }
     }
 
     if (get_current_wpm() != 000) {
-        anim_sleep = timer_read32();
+        anim_sleep = timer_read();
     }
 
-      if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-          anim_timer = timer_read32();
+    if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
+        anim_timer = timer_read();
 
-          animation_phase();
-      }
+        animation_phase();
+    }
 }
 
 void render_line(void) {
@@ -260,6 +260,9 @@ void oled_task_user(void) {
         render_logo();
         render_line();
         snprintf(wpm_str, sizeof(wpm_str), " %3d", get_current_wpm());
+        render_line();
+        oled_write_ln(" WPM", false);
+        render_line();
         oled_write_ln(wpm_str, false);
       } else {
         render_anim();
