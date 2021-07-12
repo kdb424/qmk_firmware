@@ -1,5 +1,3 @@
-#include "kdb424.h"
-
 #define _DVORAK 0
 #define _GAMING 1
 #define _RAISE1 2
