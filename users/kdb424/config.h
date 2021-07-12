@@ -20,6 +20,10 @@
     #define LEADER_TIMEOUT 500
 #endif
 
+#ifndef NO_ACTION_ONESHOT
+    #define ONESHOT_TAP_TOGGLE 3  /* Tapping this number of times holds the key until tapped once again. */
+    #define ONESHOT_TIMEOUT 180  /* Time (in ms) before the one shot key is released */
+#endif  //NO ACTION_ONESHOT
 
 /* Disable unused and unneeded features to reduce on firmware size */
 #ifdef LOCKING_SUPPORT_ENABLE
@@ -113,7 +117,7 @@
 /* disable action features */
 //#define NO_ACTION_LAYER
 //#define NO_ACTION_TAPPING
-#define NO_ACTION_ONESHOT
+//#define NO_ACTION_ONESHOT
 //#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
-#define NO_USB_STARTUP_CHECK
+//#define NO_ACTION_FUNCTION
+//#define NO_USB_STARTUP_CHECK
