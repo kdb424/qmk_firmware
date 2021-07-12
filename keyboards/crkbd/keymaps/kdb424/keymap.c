@@ -1,10 +1,16 @@
 #include QMK_KEYBOARD_H
-#include "kdb424.c"
 #include "oled.c"
+#include "kdb424.c"
 
 #ifdef RGBLIGHT_ENABLE
-extern rgblight_config_t rgblight_config;
+    extern rgblight_config_t rgblight_config;
+    #undef RGBLED_NUM
+    #define RGBLED_NUM 27
+    /* Limit max RGB LED current to avoid tripping controller fuse. */
+    #undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
+    #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150
 #endif
+
 
 #define _DVORAK 0
 #define _GAMING 1

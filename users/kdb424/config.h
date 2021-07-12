@@ -4,6 +4,10 @@
 #define USB_POLLING_INTERVAL_MS 1
 #define TAPPING_TERM 300
 
+#ifdef SPLIT_KEYBOARD
+    #define EE_HANDS
+#endif  // SPLIT_KEYBOARD
+
 #ifdef UNICODE_KEY_LNX
     #define UNICODE_SELECTED_MODES UC_LNX
     #undef UNICODE_KEY_LNX
