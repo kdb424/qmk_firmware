@@ -133,22 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
-#ifdef OLED_DRIVER_ENABLE
-
-__attribute__((weak)) bool is_keyboard_left(void){
-  return eeconfig_read_handedness();
-}
-
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  if (is_keyboard_master()) {
-    return OLED_ROTATION_270;
-  }
-  if (is_keyboard_left()){
-      return OLED_ROTATION_0;
-    } else {
-  return OLED_ROTATION_180;
-  }
-}
+#ifdef BONGOCAT
 
 #define IDLE_FRAMES 5
 #define IDLE_SPEED 20
@@ -161,7 +146,6 @@ uint16_t anim_timer = 0;
 uint16_t anim_sleep = 0;
 uint8_t current_idle_frame = 0;
 uint8_t current_tap_frame = 0;
-char wpm_str[6];
 
 static void render_anim(void) {
     static const char PROGMEM idle[IDLE_FRAMES][ANIM_SIZE] = {
@@ -240,6 +224,28 @@ static void render_anim(void) {
     }
 }
 
+#endif  //BONGOAT
+
+#ifdef OLED_DRIVER_ENABLE
+
+__attribute__((weak)) bool is_keyboard_left(void){
+  return eeconfig_read_handedness();
+}
+
+char wpm_str[6];
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+  if (is_keyboard_master()) {
+    return OLED_ROTATION_270;
+  }
+  if (is_keyboard_left()){
+      return OLED_ROTATION_0;
+    } else {
+  return OLED_ROTATION_180;
+  }
+}
+
+
 void render_line(void) {
     oled_write_P(PSTR("\n"), false);
 }
@@ -265,7 +271,9 @@ void oled_task_user(void) {
         render_line();
         oled_write_ln(wpm_str, false);
       } else {
+        #ifdef BONGOCAT
         render_anim();
+        #endif  //BONGOCAT
       }
   } else {
     oled_off();
