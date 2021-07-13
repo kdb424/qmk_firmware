@@ -10,7 +10,6 @@
 #define TAB_SB LT(_SYMBOLS, KC_TAB)
 #define SUPER_L LM(_GUI, MOD_LGUI)
 
-
 enum custom_keycodes {
   DVORAK = SAFE_RANGE,
   PLOVER,
@@ -21,13 +20,6 @@ enum custom_keycodes {
   GAMING,
   REPROGRAM_MACRO,
 };
-
-
-#ifdef STENO_ENABLE
-void matrix_init_user() {
-  steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
-}
-#endif
 
 #ifdef COMBO_ENABLE
 #include "combos.c"

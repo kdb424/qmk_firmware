@@ -126,6 +126,7 @@
     #define RGBLIGHT_EFFECT_TWINKLE_PROBABILITY 1 / 512
 #endif //RGBLIGHT_ENABLE
 
+
 /* disable action features */
 //#define NO_ACTION_LAYER
 //#define NO_ACTION_TAPPING
