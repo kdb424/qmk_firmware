@@ -1,3 +1,5 @@
+#pragma once
+
 #define _DVORAK 0
 #define _GAMING 1
 #define _RAISE1 2
@@ -26,6 +28,10 @@ void matrix_init_user() {
   steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
 }
 #endif
+
+#ifdef COMBO_ENABLE
+#include "combos.c"
+#endif  // COMBOS_ENABLE
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
