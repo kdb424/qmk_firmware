@@ -10,7 +10,7 @@
 
 #ifdef COMBO_ENABLE
     #define COMBO_COUNT 2
-    #define COMBO_TERM 100
+    #define COMBO_TERM 10
 #endif
 
 #ifdef UNICODE_KEY_LNX
@@ -31,7 +31,7 @@
 
 #ifndef NO_ACTION_ONESHOT
     #define ONESHOT_TAP_TOGGLE 3  /* Tapping this number of times holds the key until tapped once again. */
-    #define ONESHOT_TIMEOUT 180  /* Time (in ms) before the one shot key is released */
+    #define ONESHOT_TIMEOUT 250  /* Time (in ms) before the one shot key is released */
 #endif  //NO ACTION_ONESHOT
 
 /* Disable unused and unneeded features to reduce on firmware size */
