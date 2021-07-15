@@ -9,7 +9,7 @@
 #endif  // SPLIT_KEYBOARD
 
 #ifdef COMBO_ENABLE
-    #define COMBO_COUNT 2
+    #define COMBO_COUNT 6
     #define COMBO_TERM 10
 #endif
 
