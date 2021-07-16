@@ -29,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GESC,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
   TAB_SB,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
   OS_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, \
-                                      OS_LALT, SUPER_L, LT1_SP,   LT2_SP,  OS_LCTL, LGUI(KC_D) \
+                                      OS_LALT, SUPER_L, LT1_SP,   LT2_SP,  OS_LCTL, KC_NO \
 ),
 /* Gaming
  * ,-----------------------------------------.                    ,-----------------------------------------.
