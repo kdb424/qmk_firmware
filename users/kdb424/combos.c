@@ -2,13 +2,13 @@
 
 #ifdef COMBO_ENABLE
 enum combo_events {
-  MB_SCRATCH,
-  RL_PASTE,
-  CD_HAPPY,
-  QD_LOOK,
-  VZ_UNDO,
-  L_BACK,
-  SQ_REACT,
+  MB_SCRATCH,  // Scratchpad access in sway
+  RL_PASTE,  // Paste
+  CD_HAPPY,  // ><
+  QD_LOOK,  // >_>
+  VZ_UNDO,  // CTRL(Z)
+  L_BACK,  // CTRL(BACKSPACE)
+  SQ_REACT,  // +:
 };
 
 const uint16_t PROGMEM copy_combo[] = {KC_M, KC_B, COMBO_END};
